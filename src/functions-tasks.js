@@ -76,8 +76,10 @@ function getArgumentsCount(funcs) {
  *   power05(16) => 4
  *
  */
-function getPowerFunction(/* exponent */) {
-  throw new Error('Not implemented');
+function getPowerFunction(exponent) {
+  return function (n) {
+    return n ** exponent;
+  };
 }
 
 /**
@@ -93,8 +95,21 @@ function getPowerFunction(/* exponent */) {
  *   getPolynom(8)     => y = 8
  *   getPolynom()      => null
  */
-function getPolynom(/* ...coefficients */) {
-  throw new Error('Not implemented');
+function getPolynom(...coefficients) {
+  if (coefficients.length === 0) return null;
+
+  return function (x) {
+    let sum = 0;
+    const len = coefficients.length;
+
+    for (let i = 0; i < len; i += 1) {
+      const coeff = coefficients[i];
+      const power = len - 1 - i;
+      sum += coeff * x ** power;
+    }
+
+    return sum;
+  };
 }
 
 /**
